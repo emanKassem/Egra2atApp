@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:background="@color/primaryColor"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_marginRight="8dp"
+            android:text="ريال سعودي"/>
+
+        <EditText
+            android:id="@+id/moneyET"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:background="@drawable/inside_text"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:gravity="center"
+            android:background="@color/primaryColor"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/roboto_bold"
+            android:text="رسوم الخدمة"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear1"
+        app:layout_constraintRight_toRightOf="parent">
+
+
+        <EditText
+            android:id="@+id/timeET"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="5.5"
+            android:gravity="center"
+            android:background="@drawable/inside_text"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:gravity="center"
+            android:background="@color/primaryColor"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/roboto_bold"
+            android:text="المدة الزمنية للتنفيذ"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear2"
+        app:layout_constraintRight_toRightOf="parent">
+
+
+        <EditText
+            android:id="@+id/onlineET"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="5.5"
+            android:gravity="center"
+            android:background="@drawable/inside_text"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:gravity="center"
+            android:background="@color/primaryColor"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/roboto_bold"
+            android:text="إمكانية تنفيذها اونلاين"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear3"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.65"
+            android:gravity="right|center"
+            android:textColor="@color/primaryColor"
+            android:fontFamily="@font/roboto_bold"
+            android:text="يقبل التفويض"/>
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/accept"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".35"
+            android:gravity="left|center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.65"
+            android:gravity="right|center"
+            android:textColor="@color/primaryColor"
+            android:fontFamily="@font/roboto_bold"
+            android:text="شرط سداد المخالفات"/>
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/condition"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".35"
+            android:gravity="left|center"/>
+    </LinearLayout>
+    <Button
+        android:layout_marginTop="32dp"
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/linear4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/button"
+        android:textColor="@android:color/white"
+        android:text="حفظ"/>
+
+</android.support.constraint.ConstraintLayout>

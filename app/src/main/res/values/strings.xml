@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">الْإِجْرَاءَاتُ السُّعُودِيَّةُ</string>
+    <string name="login_key">Login key</string>
+    <string name="title_activity_login">تسجيل الدخول</string>
+    <string name="email">اسم المستخدم</string>
+    <string name="password">كلمة المرور</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="title_activity_admin">إضافة خدمة</string>
+    <string name="tab_text_1">بيانات الموقع</string>
+    <string name="tab_text_2">مرفقات</string>
+    <string name="tab_text_3">إجراءات</string>
+    <string name="tab_text_4">بيانات الخدمة</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="foreign">foreign</string>
+    <string name="saudi">saudi</string>
+    <string name="sectors">sectors</string>
+    <string name="sector_name">sectorName</string>
+    <string name="services">services</string>
+    <string name="duration">duration</string>
+    <string name="fees">fees</string>
+    <string name="files">files</string>
+    <string name="location">location</string>
+    <string name="nationality">nationality</string>
+    <string name="negotiability">negotiability</string>
+    <string name="online_service">onlineService</string>
+    <string name="repayment_of_violations">repaymentOfViolations</string>
+    <string name="service_name">serviceName</string>
+    <string name="service_steps">serviceSteps</string>
+    <string name="website">website</string>
+    <string name="working_hours">workingHours</string>
+    <string name="title_activity_services">ServicesActivity</string>
+    <string name="ministries">ministries</string>
+    <string name="add_sector">إضافة قطاع</string>
+
+</resources>

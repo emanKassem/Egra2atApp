@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear1"
+        app:layout_constraintRight_toRightOf="parent">
+
+
+        <EditText
+            android:id="@+id/locationET"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:background="@drawable/inside_text"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:background="@color/primaryColor"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/roboto_bold"
+            android:text="موقع الخدمة على الأنترنت"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear2"
+        app:layout_constraintRight_toRightOf="parent">
+
+
+        <EditText
+            android:id="@+id/mapNameET"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:background="@drawable/inside_text"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:background="@color/primaryColor"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/roboto_bold"
+            android:text="أسم المؤسسة على الخريطة"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/hours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear3"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="right|bottom"
+        android:text="ساعات عمل المنشأة"
+        android:textColor="@android:color/black"/>
+
+    <LinearLayout
+        android:id="@+id/linear4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hours"
+        app:layout_constraintRight_toRightOf="parent">
+
+
+        <TextView
+            android:id="@+id/to"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3.5"
+            android:gravity="center"
+            android:layout_marginLeft="16dp"
+            android:text="2:30 م"
+            android:background="@drawable/inside_button"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/from"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3.5"
+            android:gravity="center"
+            android:layout_marginRight="16dp"
+            android:text="7:00 ص"
+            android:background="@drawable/inside_text"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"/>
+    </LinearLayout>
+
+
+    <Button
+        android:layout_marginTop="32dp"
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/linear4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/button"
+        android:textColor="@android:color/white"
+        android:text="حفظ"/>
+
+    <Button
+        android:layout_marginTop="32dp"
+        android:id="@+id/addService"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/button"
+        android:textColor="@android:color/white"
+        android:layout_margin="24dp"
+        android:text="إضافة الإجراء"/>
+
+</android.support.constraint.ConstraintLayout>

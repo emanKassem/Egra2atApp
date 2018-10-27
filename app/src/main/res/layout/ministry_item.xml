@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16sp"
+    android:padding="8dp"
+    android:elevation="5dp"
+    android:background="@drawable/inside_text">
+
+
+    <TextView
+        android:id="@+id/ministryNameTV"
+        android:textSize="16sp"
+        android:fontFamily="@font/jozoor_font"
+        android:textColor="@color/primaryColor"
+        android:drawableRight="@mipmap/ministry1"
+        android:drawablePadding="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
