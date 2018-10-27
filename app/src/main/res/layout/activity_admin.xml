@@ -7,13 +7,14 @@
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context=".view.AdminActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primaryColor"
+        android:background="@android:color/transparent"
         app:theme="@style/ToolbarTheme">
 
         <include layout="@layout/bar"
@@ -21,9 +22,9 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
-            android:background="@android:color/white"
-            app:tabTextColor="@color/darkGtay"
-            app:tabSelectedTextColor="@color/primaryDarkColor"
+            android:background="@android:color/transparent"
+            app:tabTextColor="@color/gray"
+            app:tabSelectedTextColor="@android:color/white"
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -33,28 +34,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_text_1"
-                android:icon="@mipmap/location"/>
+                android:icon="@mipmap/location_selected"/>
 
             <android.support.design.widget.TabItem
                 android:id="@+id/attachments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_text_2"
-                android:icon="@mipmap/attach" />
+                android:icon="@mipmap/attach_selected" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/egra2at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_text_3"
-                android:icon="@mipmap/egraa"/>
+                android:icon="@mipmap/check_circle_selected"/>
 
             <android.support.design.widget.TabItem
                 android:id="@+id/serviceInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tab_text_4"
-                android:icon="@mipmap/info" />
+                android:icon="@mipmap/info_selected" />
 
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>

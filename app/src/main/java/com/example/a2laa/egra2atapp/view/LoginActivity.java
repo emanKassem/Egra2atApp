@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = pass.getText().toString();
         if (userName.equals("admin")&&password.equals("admin")){
             Toast.makeText(this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, AdminActivity.class);
+            Intent intent = new Intent(this, Main2Activity.class);
             PrefUtils.storeKeys(this, getString(R.string.login_key), "true");
             startActivity(intent);
             finish();

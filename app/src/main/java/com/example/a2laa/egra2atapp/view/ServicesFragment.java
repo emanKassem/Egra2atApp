@@ -47,6 +47,7 @@ public class ServicesFragment extends Fragment {
         View view = inflater.inflate(R.layout.sectors_fragment, container, false);
         ButterKnife.bind(this, view);
         toolbar_title.setText("الاجراءات");
+        addServiceTV.setText("إضافة إجراء");
         final String ministryName = getArguments().getString("ministryName");
         final String sectorName = getArguments().getString("sectorName");
         RecyclerView.LayoutManager manager = new LinearLayoutManager(context);

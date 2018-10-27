@@ -5,9 +5,9 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/primaryColor"
     app:titleTextColor="@android:color/white"
     android:gravity="right|center_horizontal"
+    android:background="@android:color/white"
     android:textAlignment="gravity"
     app:layout_collapseMode="pin"
     app:layout_scrollFlags="scroll|enterAlways"
@@ -19,7 +19,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="8dp"
         android:layout_gravity="right"
-        android:background="@mipmap/menu"
+        android:background="@mipmap/logo"
         />
 
     <TextView
@@ -27,9 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="القائمة الرئيسية"
-        android:layout_gravity="right"
+        android:layout_gravity="center"
         android:textSize="20dp"
-        android:textColor="@android:color/white"
+        android:textColor="@color/primaryColor"
         android:fontFamily="@font/jozoor_font"
         />
 

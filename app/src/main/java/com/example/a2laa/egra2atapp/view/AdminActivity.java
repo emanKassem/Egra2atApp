@@ -40,9 +40,11 @@ public class AdminActivity extends AppCompatActivity {
         String ministryName = getIntent().getStringExtra("ministryName");
         String sectorName = getIntent().getStringExtra("sectorName");
         String serviceJson = getIntent().getStringExtra("service");
+        String serviceNameJson = getIntent().getStringExtra("serviceName");
         if (serviceJson!=null){
             PrefUtils.storeKeys(this, "service", serviceJson);
             PrefUtils.storeKeys(this, "update", "true");
+            PrefUtils.storeKeys(this, "serviceName", serviceNameJson);
             title.setText("تعديل إجراء");
         }else{
             title.setText("إضافة إجراء");
@@ -112,5 +114,15 @@ public class AdminActivity extends AppCompatActivity {
             // Show 3 total pages.
             return 4;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        PrefUtils.storeKeys(this, "service", null);
+        PrefUtils.storeKeys(this, "update", null);
+        PrefUtils.storeKeys(this, "serviceName", null);
+        PrefUtils.storeKeys(this, "ministryName", null);
+        PrefUtils.storeKeys(this, "sectorName", null);
     }
 }

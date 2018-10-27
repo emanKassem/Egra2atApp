@@ -59,8 +59,9 @@ public class PlaceFragment extends Fragment {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_place, container, false);
         ButterKnife.bind(this, view);
-        String update = PrefUtils.getKeys(context, "update");
+        final String update = PrefUtils.getKeys(context, "update");
         if (update!=null){
+            addService.setText("تعديل الاجراء");
             String serviceJson = PrefUtils.getKeys(context, "service");
             Gson gson = new Gson();
             Service service = gson.fromJson(serviceJson, Service.class);
@@ -145,9 +146,21 @@ public class PlaceFragment extends Fragment {
                     progressDialog.setMessage("يتم إضافة الاجراء ...");
                     progressDialog.show();
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+                    if (update!=null){
+                        String serviceName = PrefUtils.getKeys(context, "serviceName");
+                        if (serviceName!=null && !serviceName.endsWith(service.getServiceName())){
+                            DatabaseReference myRef = database.getReference(getString(R.string.ministries)).child(ministryName)
+                                    .child(getString(R.string.sectors)).child(sectorName)
+                                    .child(getString(R.string.services)).child(serviceName);
+                            myRef.removeValue();
+                        }
+                    }
+
                     DatabaseReference myRef = database.getReference(getString(R.string.ministries)).child(ministryName)
                             .child(getString(R.string.sectors)).child(sectorName)
                             .child(getString(R.string.services)).child(service.getServiceName());
+                    myRef.removeValue();
                     myRef.child(getString(R.string.service_name)).setValue(service.getServiceName());
                     if (service.getServiceSteps()!=null){
                         List<String> steps = new ArrayList<>(service.getServiceSteps().values());
@@ -166,14 +179,21 @@ public class PlaceFragment extends Fragment {
                         List<String> files = new ArrayList<>(service.getFiles().values());
                         for (int i = 1; i<=files.size(); i++){
                             Uri file = Uri.parse(files.get(i-1));
-                            myRef.child(getString(R.string.files)).child("file"+i).setValue(file.getLastPathSegment());
-                            StorageReference riversRef = mStorageRef.child(service.getServiceName()).child(file.getLastPathSegment());
-                            riversRef.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                }
-                            });
+                            if (file.getLastPathSegment()!=null) {
+                                myRef.child(getString(R.string.files)).child("file"+i).setValue(file.getLastPathSegment());
+                                StorageReference riversRef = mStorageRef.child(file.getLastPathSegment());
+                                riversRef.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                    }
+                                });
+                            }
+                            else {
+                                myRef.child(getString(R.string.files)).child("file"+i).setValue(file.toString());
+                            }
                         }
+
                     }
                     myRef.child(getString(R.string.duration)).setValue(service.getDuration());
                     myRef.child(getString(R.string.location)).setValue(service.getLocation());

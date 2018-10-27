@@ -91,7 +91,7 @@ public class InfoFragment extends Fragment {
                 }
             }
             if (service.getServiceSteps() != null) {
-                steps = (List<String>) service.getServiceSteps().values();
+                steps = new ArrayList<>(service.getServiceSteps().values());
             }
         }
         adapter = new ServiceStepsAdapter(steps);

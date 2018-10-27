@@ -32,5 +32,6 @@
     <string name="title_activity_services">ServicesActivity</string>
     <string name="ministries">ministries</string>
     <string name="add_sector">إضافة قطاع</string>
+    <string name="ministry_name">ministryName</string>
 
 </resources>

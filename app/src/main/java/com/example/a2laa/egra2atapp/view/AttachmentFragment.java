@@ -39,7 +39,6 @@ public class AttachmentFragment extends Fragment{
     RecyclerView attachmentsRecyclerView;
     @BindView(R.id.NoAttachmentsTV)
     TextView NoAttachmentsTV;
-    List<Uri> filesUris = new ArrayList<>();
     Context context = App.getContext();
     AttachmentsAdapter adapter;
     @Nullable
@@ -54,19 +53,18 @@ public class AttachmentFragment extends Fragment{
             Gson gson = new Gson();
             Service service = gson.fromJson(serviceJson, Service.class);
             if (service.getFiles()!=null){
+                List<Uri> filesUris = new ArrayList<>();
                 for (String file: service.getFiles().values()){
                     filesUris.add(Uri.parse(file));
+                    attachmentsRecyclerView.setLayoutManager(manager);
+                    adapter = new AttachmentsAdapter(filesUris);
+                    attachmentsRecyclerView.setAdapter(adapter);
+                    NoAttachmentsTV.setVisibility(View.GONE);
                 }
+            }else {
+                NoAttachmentsTV.setVisibility(View.VISIBLE);
             }
         }
-        attachmentsRecyclerView.setLayoutManager(manager);
-        adapter = new AttachmentsAdapter(filesUris);
-        if (filesUris.size()!=0){
-            NoAttachmentsTV.setVisibility(View.GONE);
-        }else {
-            NoAttachmentsTV.setVisibility(View.VISIBLE);
-        }
-        attachmentsRecyclerView.setAdapter(adapter);
         addFilesFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +83,15 @@ public class AttachmentFragment extends Fragment{
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1) {
             if(resultCode == Activity.RESULT_OK) {
+                String serviceJson = PrefUtils.getKeys(context, "service");
+                Gson gson = new Gson();
+                Service service = gson.fromJson(serviceJson, Service.class);
+                List<Uri> filesUris = new ArrayList<>();
+                if (service!=null && service.getFiles()!=null){
+                    for (String file: service.getFiles().values()){
+                        filesUris.add(Uri.parse(file));
+                    }
+                }
                 if(data.getClipData() != null) {
                     NoAttachmentsTV.setVisibility(View.GONE);
                     int count = data.getClipData().getItemCount();
@@ -93,18 +100,13 @@ public class AttachmentFragment extends Fragment{
                         Uri imageUri = data.getClipData().getItemAt(currentItem).getUri();
                         filesUris.add(filesUris.size(), imageUri);
                         currentItem = currentItem + 1;
-                        adapter.notifyItemInserted(filesUris.size()-1);
-                        attachmentsRecyclerView.scrollToPosition(filesUris.size()-1);
                     }
                 } else if(data.getData() != null) {
                     NoAttachmentsTV.setVisibility(View.GONE);
                     filesUris.add(filesUris.size(), data.getData());
-                    adapter.notifyItemInserted(filesUris.size()-1);
-                    attachmentsRecyclerView.scrollToPosition(filesUris.size()-1);
                 }
-                Gson gson = new Gson();
-                String json = PrefUtils.getKeys(context, "service");
-                final Service service =gson.fromJson(json, Service.class);
+                adapter = new AttachmentsAdapter(filesUris);
+                attachmentsRecyclerView.setAdapter(adapter);
                 List<String> files = new ArrayList<>();
                 for (Uri file: filesUris){
                     files.add(file.toString());
@@ -114,7 +116,7 @@ public class AttachmentFragment extends Fragment{
                     filesMap.put("file"+i, files.get(i-1));
                 }
                 service.setFiles(filesMap);
-                json = gson.toJson(service);
+                String json = gson.toJson(service);
                 PrefUtils.storeKeys(context, "service", json);
             }
         }
