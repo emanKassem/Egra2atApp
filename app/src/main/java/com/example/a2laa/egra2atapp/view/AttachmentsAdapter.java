@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a2laa.egra2atapp.R;
 import com.example.a2laa.egra2atapp.app.App;
@@ -18,6 +20,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -62,6 +65,16 @@ public class AttachmentsAdapter extends RecyclerView.Adapter<AttachmentsAdapter.
                 mStorageRef.delete();
                 filesUris.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
+            }
+        });
+        holder.attachmentName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String extention = MimeTypeMap.getFileExtensionFromUrl(filesUris.get(holder.getAdapterPosition()).toString());
+                Toast.makeText(context, extention, Toast.LENGTH_LONG).show();
+               /* StorageReference mStorageRef;
+                mStorageRef = FirebaseStorage.getInstance().getReference();
+                File file = File.createTempFile()*/
             }
         });
     }

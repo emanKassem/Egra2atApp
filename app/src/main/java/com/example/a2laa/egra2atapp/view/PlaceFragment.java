@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -182,7 +183,9 @@ public class PlaceFragment extends Fragment {
                             if (file.getLastPathSegment()!=null) {
                                 myRef.child(getString(R.string.files)).child("file"+i).setValue(file.getLastPathSegment());
                                 StorageReference riversRef = mStorageRef.child(file.getLastPathSegment());
-                                riversRef.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                String fileS = MimeTypeMap.getFileExtensionFromUrl(file.toString());
+                                String f = file.toString().replace("."+fileS, "");
+                                riversRef.putFile(Uri.parse(f)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 

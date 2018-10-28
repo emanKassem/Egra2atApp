@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.a2laa.egra2atapp.R;
@@ -40,6 +42,10 @@ public class ServicesFragment extends Fragment {
     TextView noServicesTV;
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
+    @BindView(R.id.addSectorLinear)
+    LinearLayout addSectorLinear;
+    @BindView(R.id.progress)
+    ProgressBar progressBar;
     Context context = App.getContext();
     @Nullable
     @Override
@@ -55,26 +61,32 @@ public class ServicesFragment extends Fragment {
         if (Utils.isOnline(context)){
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference(getString(R.string.ministries)).child(ministryName);
+            progressBar.setVisibility(View.VISIBLE);
             myRef.child(getString(R.string.sectors)).child(sectorName)
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            progressBar.setVisibility(View.GONE);
                             Sector sector = dataSnapshot.getValue(Sector.class);
                             if (sector!=null && sector.getServices()!=null){
+                                noServicesTV.setVisibility(View.GONE);
                                 List<Service> services = new ArrayList<>(sector.getServices().values());
                                 ServicesAdapter adapter = new ServicesAdapter(services, ministryName, sectorName);
                                 servicesRecyclerView.setAdapter(adapter);
+                            }else {
+                                noServicesTV.setVisibility(View.VISIBLE);
+                                noServicesTV.setText("لا يوجد إجراءات");
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            progressBar.setVisibility(View.GONE);
                         }
                     });
         }
 
-        addServiceTV.setOnClickListener(new View.OnClickListener() {
+        addSectorLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, AdminActivity.class);

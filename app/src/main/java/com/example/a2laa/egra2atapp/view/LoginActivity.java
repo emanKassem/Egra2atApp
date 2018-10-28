@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setEnabled(false);
         String userName = user.getText().toString();
         String password = pass.getText().toString();
-        if (userName.equals("admin")&&password.equals("admin")){
+        if (userName.equals("APIT")&&password.equals("APIT1234")){
             Toast.makeText(this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, Main2Activity.class);
             PrefUtils.storeKeys(this, getString(R.string.login_key), "true");
@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }else {
             Toast.makeText(this, "فشل تسجيل الدخول", Toast.LENGTH_LONG).show();
+            login.setEnabled(true);
         }
     }
 

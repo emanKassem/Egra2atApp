@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:titleTextColor="@android:color/white"
+    android:gravity="right|center_horizontal"
+    android:background="@android:color/white"
+    android:textAlignment="gravity"
+    app:layout_collapseMode="pin"
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:theme="@style/MyToolbarTheme">
+
+    <ImageView
+        android:id="@+id/toolbar_back"
+        android:layout_width="35dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="8dp"
+        android:layout_gravity="right"
+        android:background="@mipmap/logo"
+        />
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="القائمة الرئيسية"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/primaryColor"
+        android:fontFamily="@font/jozoor_font"
+        />
+
+    <ImageView
+        android:id="@+id/logout"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="8dp"
+        android:layout_gravity="left"
+        android:background="@drawable/shutdown"
+        />
+
+
+
+</android.support.v7.widget.Toolbar>

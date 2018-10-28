@@ -16,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,10 @@ public class SectorsFragment extends Fragment {
     TextView noSectorsTV;
     @BindView(R.id.toolbar_title)
     TextView toolbar_title;
+    @BindView(R.id.addSectorLinear)
+    LinearLayout addSectorLinear;
+    @BindView(R.id.progress)
+    ProgressBar progressBar;
     Context context = App.getContext();
     EditText newSector;
     Button addSector;
@@ -59,16 +65,18 @@ public class SectorsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sectors_fragment, container, false);
         ButterKnife.bind(this, view);
-        toolbar_title.setText("القطاعات");
         final RecyclerView.LayoutManager manager = new LinearLayoutManager(context);
         sectorsRecyclerView.setLayoutManager(manager);
         final String ministryName = getArguments().getString("ministryName");
+        toolbar_title.setText("قطاعات "+ ministryName);
         if (Utils.isOnline(context)) {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference(getString(R.string.ministries)).child(ministryName);
+            progressBar.setVisibility(View.VISIBLE);
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    progressBar.setVisibility(View.GONE);
                     Ministry ministry = dataSnapshot.getValue(Ministry.class);
                     if (ministry!=null && ministry.getSectors()!=null) {
                         List<Sector> sectors = new ArrayList<>(ministry.getSectors().values());
@@ -88,7 +96,7 @@ public class SectorsFragment extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    progressBar.setVisibility(View.GONE);
                 }
             });
         } else {
@@ -96,7 +104,7 @@ public class SectorsFragment extends Fragment {
             sectorsRecyclerView.setVisibility(View.GONE);
             noSectorsTV.setText("لا يوجد اتصال بالانترنت");
         }
-        addSectorTV.setOnClickListener(new View.OnClickListener() {
+        addSectorLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -133,7 +141,9 @@ public class SectorsFragment extends Fragment {
                                         .child(getString(R.string.sector_name)).setValue(sectorName);
                                 if (adapter!=null){
                                     adapter.AddSector(sectorName);
+                                    adapter.notifyDataSetChanged();
                                 }else {
+                                    sectorsRecyclerView.setVisibility(View.VISIBLE);
                                     List<String> sectors = new ArrayList<>();
                                     sectors.add(sectorName);
                                     adapter = new SectorsAdapter(sectors, ministryName);

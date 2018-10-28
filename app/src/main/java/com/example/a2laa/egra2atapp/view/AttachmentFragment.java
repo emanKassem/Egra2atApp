@@ -1,6 +1,7 @@
 package com.example.a2laa.egra2atapp.view;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -47,6 +48,7 @@ public class AttachmentFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_attachment, container, false);
         ButterKnife.bind(this, view);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(context);
+        attachmentsRecyclerView.setLayoutManager(manager);
         String update = PrefUtils.getKeys(context, "update");
         if (update!=null){
             String serviceJson = PrefUtils.getKeys(context, "service");
@@ -56,7 +58,6 @@ public class AttachmentFragment extends Fragment{
                 List<Uri> filesUris = new ArrayList<>();
                 for (String file: service.getFiles().values()){
                     filesUris.add(Uri.parse(file));
-                    attachmentsRecyclerView.setLayoutManager(manager);
                     adapter = new AttachmentsAdapter(filesUris);
                     attachmentsRecyclerView.setAdapter(adapter);
                     NoAttachmentsTV.setVisibility(View.GONE);
@@ -92,18 +93,30 @@ public class AttachmentFragment extends Fragment{
                         filesUris.add(Uri.parse(file));
                     }
                 }
+                ContentResolver cr = context.getContentResolver();
                 if(data.getClipData() != null) {
                     NoAttachmentsTV.setVisibility(View.GONE);
                     int count = data.getClipData().getItemCount();
                     int currentItem = 0;
                     while(currentItem < count) {
                         Uri imageUri = data.getClipData().getItemAt(currentItem).getUri();
-                        filesUris.add(filesUris.size(), imageUri);
+                        String mime = cr.getType(imageUri);
+                        String[] file = mime.split("/");
+                        String extension  = file[1];
+                        String fileUri = data.getData().toString().concat("."+extension);
+                        Uri uri = Uri.parse(fileUri);
+                        filesUris.add(filesUris.size(), uri);
                         currentItem = currentItem + 1;
                     }
                 } else if(data.getData() != null) {
                     NoAttachmentsTV.setVisibility(View.GONE);
-                    filesUris.add(filesUris.size(), data.getData());
+                    String mime = cr.getType(data.getData());
+                    String[] file = mime.split("/");
+                    String extension  = file[1];
+                    String fileUri = data.getData().toString().concat("."+extension);
+                    Uri uri = Uri.parse(fileUri);
+                    filesUris.add(filesUris.size(), uri);
+
                 }
                 adapter = new AttachmentsAdapter(filesUris);
                 attachmentsRecyclerView.setAdapter(adapter);
@@ -123,9 +136,5 @@ public class AttachmentFragment extends Fragment{
 
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
 
-    }
 }
